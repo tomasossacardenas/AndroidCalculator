@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">Campgrounds</string>
+    <string name="app_name">Campground</string>
+
+    <!-- Campground 1 -->
+    <string name="campground1_title">Riverside Retreat</string>
+    <string name="campground1_location">Mountain Valley, Colorado</string>
+    <string name="campground1_description">A serene campground nestled by the river, offering breathtaking views of the surrounding mountains.</string>
+    <string name="campground1_price">30</string>
+
+    <!-- Campground 2 -->
+    <string name="campground2_title">Sunset Shores Camp</string>
+    <string name="campground2_location">Coastal Haven, California</string>
+    <string name="campground2_description">Experience stunning sunsets over the ocean at this picturesque campground with beachside campsites.</string>
+    <string name="campground2_price">40</string>
+
+    <!-- Campground 3 -->
+    <string name="campground3_title">Woodland Haven</string>
+    <string name="campground3_location">Old Pine Forest, Oregon</string>
+    <string name="campground3_description">Get lost in the tranquility of nature with spacious campsites surrounded by towering pine trees.</string>
+    <string name="campground3_price">35</string>
+
+    <!-- Campground 4 -->
+    <string name="campground4_title">Desert Oasis Camp</string>
+    <string name="campground4_location">Sandscape, Arizona</string>
+    <string name="campground4_description">Escape to the desert and enjoy starry nights and a unique camping experience under the clear desert sky.</string>
+    <string name="campground4_price">25</string>
+
 </resources>
