@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 
 import com.example.campgroundsAndroid.databinding.ActivityMainBinding;
 
@@ -62,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("location", selectedCampground.location);
                 intent.putExtra("image", selectedCampground.image);
                 startActivity(intent);
+            }
+        });
+
+        Button btn = (Button)findViewById(R.id.buttonCreateCamp);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CreateCamp.class));
             }
         });
     }
