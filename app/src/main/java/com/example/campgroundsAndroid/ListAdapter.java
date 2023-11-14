@@ -23,7 +23,6 @@ public class ListAdapter extends ArrayAdapter<Campground> {
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         Campground listData = getItem(position);
-        Log.e("MY-TAG", listData.toString());
         if (view == null){
             view = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
@@ -34,7 +33,7 @@ public class ListAdapter extends ArrayAdapter<Campground> {
 
         listImage.setImageResource(listData.image);
         listName.setText(listData.title);
-        listTime.setText(String.valueOf(listData.price));
+        listTime.setText("$"+String.valueOf(listData.price));
 
         return view;
     }

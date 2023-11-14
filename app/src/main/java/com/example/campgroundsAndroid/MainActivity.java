@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 Campground selectedCampground = campgroundsList.get(i);
                 Log.e("MY-TAG sel", selectedCampground.toString());
                 Intent intent = new Intent(MainActivity.this, DetailedActivity.class);
-                intent.putExtra("name", selectedCampground.title);
-                intent.putExtra("time", selectedCampground.price);
-                intent.putExtra("ingredients", selectedCampground.description);
+                intent.putExtra("title", selectedCampground.title);
                 intent.putExtra("price", selectedCampground.price);
+                intent.putExtra("description", selectedCampground.description);
+                intent.putExtra("location", selectedCampground.location);
                 intent.putExtra("image", selectedCampground.image);
                 startActivity(intent);
             }

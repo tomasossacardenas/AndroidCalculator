@@ -19,16 +19,16 @@ public class DetailedActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         if (intent != null){
-            String name = intent.getStringExtra("name");
-            String time = intent.getStringExtra("time");
-            int ingredients = intent.getIntExtra("ingredients", R.string.campground1_description);
-            int desc = intent.getIntExtra("desc", R.string.campground1_price);
+            String title = intent.getStringExtra("title");
+            String description = intent.getStringExtra("description");
+            String location = intent.getStringExtra("location");
+            int price = intent.getIntExtra("price", R.string.campground1_price);
             int image = intent.getIntExtra("image", R.drawable.camp1);
 
-            binding.detailName.setText(name);
-            binding.detailTime.setText(time);
-            binding.detailDesc.setText(desc);
-            binding.detailIngredients.setText(ingredients);
+            binding.detailedTitle.setText(title);
+            binding.detailedLocation.setText(location);
+            binding.detailedPrice.setText(Integer.toString(price));
+            binding.detailedDescription.setText(description);
             binding.detailImage.setImageResource(image);
         }
     }
