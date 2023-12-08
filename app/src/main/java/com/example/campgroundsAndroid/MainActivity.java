@@ -3,6 +3,7 @@ package com.example.campgroundsAndroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,14 +11,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.example.campgroundsAndroid.databinding.ActivityMainBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     ListAdapter listAdapter;
-    ArrayList<Campground> campgroundsList = new ArrayList<>();
+    ArrayList<Campground> campgroundsList;
     ListData listData;
 
     @Override
@@ -28,24 +32,25 @@ public class MainActivity extends AppCompatActivity {
 
         int[] imageList = {R.drawable.camp1, R.drawable.camp2, R.drawable.camp3, R.drawable.camp4, R.drawable.pizza, R.drawable.burger, R.drawable.fries};
 
-        Campground campground1 = new Campground(
-                getString(R.string.campground1_title),
-                getString(R.string.campground1_location),
-                getString(R.string.campground1_description),
-                Integer.parseInt(getString(R.string.campground1_price)),
-                R.drawable.camp1
-        );
-
-        Campground campground2 = new Campground(
-                getString(R.string.campground2_title),
-                getString(R.string.campground2_location),
-                getString(R.string.campground2_description),
-                Integer.parseInt(getString(R.string.campground2_price)),
-                R.drawable.camp2
-        );
-
-        campgroundsList.add(campground1);
-        campgroundsList.add(campground2);
+        loadData();
+//        Campground campground1 = new Campground(
+//                getString(R.string.campground1_title),
+//                getString(R.string.campground1_location),
+//                getString(R.string.campground1_description),
+//                Integer.parseInt(getString(R.string.campground1_price)),
+//                R.drawable.camp1
+//        );
+//
+//        Campground campground2 = new Campground(
+//                getString(R.string.campground2_title),
+//                getString(R.string.campground2_location),
+//                getString(R.string.campground2_description),
+//                Integer.parseInt(getString(R.string.campground2_price)),
+//                R.drawable.camp2
+//        );
+//
+//        campgroundsList.add(campground1);
+//        campgroundsList.add(campground2);
 
         listAdapter = new ListAdapter(MainActivity.this, campgroundsList);
         binding.listview.setAdapter(listAdapter);
@@ -66,13 +71,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn = (Button)findViewById(R.id.buttonCreateCamp);
+        Button buttonCreateCamp = (Button)findViewById(R.id.buttonCreateCamp);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        buttonCreateCamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CreateCamp.class));
+                EditText title = findViewById(R.id.editTextTitle);
+                EditText location = findViewById(R.id.editTextLocation);
+                EditText description = findViewById(R.id.editTextDesc);
+                EditText price = findViewById(R.id.editTextPrice);
+                EditText image = findViewById(R.id.editTextLocation);
+
+                insertItem(line1.getText().toString(), line2.getText().toString());
+                saveData();
             }
         });
+    }
+
+    private void insertItem(String title, String location, String description, int price, int image) {
+        campgroundsList.add(new Campground(title, location, description, price, image));
+    }
+    public void saveData(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        Gson gson= new Gson();
+        String json= gson.toJson(campgroundsList);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Campground>>() {}.getType();
+        campgroundsList = gson.fromJson(json, type);
+
+        if (campgroundsList == null) {
+            campgroundsList = new ArrayList<>();
+        }
     }
 }
