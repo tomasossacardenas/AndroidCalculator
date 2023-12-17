@@ -1,6 +1,7 @@
 package com.example.campgroundsAndroid;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ public class ListAdapter extends ArrayAdapter<Campground> {
         TextView listName = view.findViewById(R.id.listName);
         TextView listTime = view.findViewById(R.id.listTime);
 
-        listImage.setImageResource(listData.image);
+        listImage.setImageURI(Uri.parse(listData.image));
         listName.setText(listData.title);
         listTime.setText("$"+String.valueOf(listData.price));
 
